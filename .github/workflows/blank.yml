@@ -54,7 +54,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         with:
           comment: "Manual approval required to destroy infrastructure."
-          reviewers: "your-github-username"
+          reviewers: "hamzabekhtaoui"
 
       - name: Checkout code
         uses: actions/checkout@v4
