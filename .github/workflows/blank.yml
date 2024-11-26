@@ -39,3 +39,34 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
         run: terraform apply -auto-approve tfplan
+  destroy:
+    # Separate job for destroy
+    runs-on: ubuntu-latest
+    needs: terraform # Ensures the destroy job runs after the terraform job
+
+    steps:
+      - name: Approval Step
+        uses: hmarr/auto-approve-action@v2
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          comment: "Manual approval required to destroy infrastructure."
+          reviewers: "your-github-username"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Destroy Terraform
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+        run: terraform destroy -auto-approve
