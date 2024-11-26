@@ -4,14 +4,19 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: { { matrix.os } }
+    matrix:
+      os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Say Hello
         run: echo "🎉 Hello, GitHub Actions are running!"
