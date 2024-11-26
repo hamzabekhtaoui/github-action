@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"s3_bucket","Source":"./terraform-s3-module","Dir":"terraform-s3-module"}]}
