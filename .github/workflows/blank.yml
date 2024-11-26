@@ -9,7 +9,8 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-
+    environment:
+      name: dev
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -46,6 +47,8 @@ jobs:
   destroy:
     # Separate job for destroy
     runs-on: ubuntu-latest
+    environment:
+      name: dev
     needs: terraform # Ensures the destroy job runs after the terraform job
 
     steps:
