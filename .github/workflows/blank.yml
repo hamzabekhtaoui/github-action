@@ -52,10 +52,6 @@ jobs:
     needs: terraform # Ensures the destroy job runs after the terraform job
 
     steps:
-      - name: Approval Step
-        uses: hmarr/auto-approve-action@v2
-        if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
-
       - name: Checkout code
         uses: actions/checkout@v4
 
