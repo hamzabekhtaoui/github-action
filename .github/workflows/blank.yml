@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: dev
-    needs: terraform # Ensures the destroy job runs after the terraform job
+    needs: apply # Ensures the destroy job runs after the terraform job
 
     steps:
       - name: Checkout code
