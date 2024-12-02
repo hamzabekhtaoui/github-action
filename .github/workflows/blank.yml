@@ -55,9 +55,6 @@ jobs:
       - name: Approval Step
         uses: hmarr/auto-approve-action@v2
         if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
-        with:
-          comment: "Manual approval required to destroy infrastructure."
-          reviewers: "hamzabekhtaoui"
 
       - name: Checkout code
         uses: actions/checkout@v4
